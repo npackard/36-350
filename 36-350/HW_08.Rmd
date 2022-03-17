@@ -134,7 +134,6 @@ expect_equal(f('z'), log(26))
 expect_error(f(1), "non-numeric argument")
 expect_error(f("", ""), "unused argument")
 expect_warning(f("ab"), "more than one character")
-print("All tests passed!")
 
 ```
 
