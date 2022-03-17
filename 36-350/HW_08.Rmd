@@ -96,7 +96,7 @@ Another way to create a code branch is to "fork" a repository. Two words that yo
 In this exercise, you are going to fork the `36-350-Fork` repository in my (i.e., `mohamedfarag`'s) account. Point your browser to `https://github.com/mohamedfarag/36-350-Fork` and click on the `Fork` button at top right. When/if you are prompted as to where you want the forked repository to go, indicate that you want it to go to *your* `GitHub` account. Once you've done that, source via `source_url()` the `check_mark.R` file in the repo. The path to the file should include *your account name*, and not mine! (Note that when you run the code chunk, you may see a "spinning circle," with the ultimate output not shown. This is OK...the file should still knit with the correct output.)
 
 ```{r linewidth=80}
-#source_url("Enter the URL to **your** forked version of check_mark.R here")
+source_url("https://raw.githubusercontent.com/npackard/36-350-Fork/main/check_mark.R")
 ```
 ---
 
@@ -129,7 +129,13 @@ if ( require("testthat") == FALSE ) {
   library(testthat)
 }
 
-# FILL ME IN
+expect_equal(f('a'), 0)
+expect_equal(f('z'), log(26))
+expect_error(f(1), "non-numeric argument")
+expect_error(f("", ""), "unused argument")
+expect_warning(f("ab"), "more than one character")
+print("All tests passed!")
+
 ```
 
 ## Question 6
@@ -139,5 +145,18 @@ if ( require("testthat") == FALSE ) {
 
 Rewrite `f()` below in such a way that all your tests of Q5 pass. (And demonstrate that your tests pass!)
 ```{r linewidth=80}
-# FILL ME IN
+
+f = function(letter) {
+  if (typeof(letter) != "character") stop("non-numeric argument")
+  if (nchar(letter) > 1) warning("more than one character")
+  return(log(which(letters == tolower(substr(letter, 1, 1)))))
+}
+
+expect_equal(f('a'), 0)
+expect_equal(f('z'), log(26))
+expect_error(f(1), "non-numeric argument")
+expect_error(f("", ""), "unused argument")
+expect_warning(f("ab"), "more than one character")
+print("All tests passed!")
+
 ```
